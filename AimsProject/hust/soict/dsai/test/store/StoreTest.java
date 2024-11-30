@@ -1,5 +1,5 @@
 package hust.soict.dsai.test.store;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.disc.DigitalVideoDisc từ package disc
+import hust.soict.dsai.aims.media.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.media.DigitalVideoDisc từ package disc
 
 import hust.soict.dsai.aims.store.Store;
 
@@ -10,9 +10,9 @@ public class StoreTest {
         Store store = new Store(5);
 
         // Tạo một số DVD mẫu
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("1", "Inception", "Sci-Fi", 19.99f, "Christopher Nolan", 148);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("2", "Titanic", "Romance", 15.99f, "James Cameron", 195);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("3", "Avatar", "Action", 22.99f, "James Cameron", 162);
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "Inception", "Sci-Fi", 19.99f, "Christopher Nolan", 148);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Titanic", "Romance", 15.99f, "James Cameron", 195);
+        DigitalVideoDisc dvd3 = new DigitalVideoDisc(3, "Avatar", "Action", 22.99f, "James Cameron", 162);
 
         // Thêm DVD vào cửa hàng
         store.addDVD(dvd1);
