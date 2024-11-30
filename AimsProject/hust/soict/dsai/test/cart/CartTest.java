@@ -1,5 +1,5 @@
 package hust.soict.dsai.test.cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.disc.DigitalVideoDisc từ package disc
+import hust.soict.dsai.aims.media.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.media.DigitalVideoDisc từ package disc
 import hust.soict.dsai.aims.cart.Cart;
 
 public class CartTest {

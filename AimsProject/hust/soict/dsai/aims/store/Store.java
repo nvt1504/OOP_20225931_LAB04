@@ -1,5 +1,5 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.disc.DigitalVideoDisc từ package disc
+import hust.soict.dsai.aims.media.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.media.DigitalVideoDisc từ package disc
 
 
 public class Store {
