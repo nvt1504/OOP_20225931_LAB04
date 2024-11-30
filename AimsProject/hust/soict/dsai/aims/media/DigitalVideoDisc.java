@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public class DigitalVideoDisc extends Disc {
+public class DigitalVideoDisc extends Disc implements Playable {
     private static int nbDigitalVideoDiscs = 0;  // Đếm số lượng DVD đã tạo
     private String director;
     private int length;
@@ -58,7 +58,7 @@ public class DigitalVideoDisc extends Disc {
     }
 
     // Phương thức hiển thị thông tin DVD
-    public void showInfo() {
+    public void play() {
         System.out.println("DVD ID: " + getId());
         System.out.println("DVD Title: " + getTitle());
         System.out.println("Category: " + getCategory());
