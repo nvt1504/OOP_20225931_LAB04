@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public class Track {
+public class Track implements Playable {
     private String title;  // Tiêu đề bài hát
     private int length;    // Độ dài bài hát
 
@@ -35,7 +35,7 @@ public class Track {
     }
 
     // Phương thức hiển thị thông tin Track
-    public void showInfo() {
+    public void play() {
         System.out.println("Track Title: " + title);
         System.out.println("Track Length: " + (length > 0 ? length + " minutes" : "N/A"));
     }
