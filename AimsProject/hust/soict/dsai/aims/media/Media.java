@@ -6,6 +6,10 @@
         private final String category;    // Danh mục không thay đổi
         private final float price;        // Giá không thay đổi
 
+        public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+        public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
+
+
         // Constructor
         public Media(int id, String title, String category, float price) {
             if (id < 0) throw new IllegalArgumentException("ID must be a non-negative integer.");
