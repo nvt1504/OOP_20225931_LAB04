@@ -98,4 +98,10 @@ public class DigitalVideoDisc extends Disc implements Playable {
     public static int getNbDigitalVideoDiscs() {
         return nbDigitalVideoDiscs;
     }
+    @Override
+    public String toString() {
+        return "DigitalVideoDisc[ID=" + getId() + ", Title=" + getTitle() + ", Director=" + director +
+                ", Length=" + length + " minutes, Price=" + getPrice() + "]";
+    }
+
 }

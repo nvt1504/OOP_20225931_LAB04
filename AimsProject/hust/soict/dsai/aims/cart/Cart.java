@@ -28,13 +28,14 @@ public class Cart {
     }
 
     // Xóa Media khỏi giỏ hàng
-    public void removeMedia(Media media) {
+    public boolean removeMedia(Media media) {
         if (itemsOrdered.contains(media)) {
             itemsOrdered.remove(media);
             System.out.println(media.getTitle() + " đã được xóa khỏi giỏ hàng.");
         } else {
             System.out.println(media.getTitle() + " không tìm thấy trong giỏ hàng.");
         }
+        return false;
     }
 
     // Tính tổng chi phí

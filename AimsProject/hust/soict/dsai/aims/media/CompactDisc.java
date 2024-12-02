@@ -58,4 +58,9 @@ public class CompactDisc extends Disc implements Playable {
             track.play(); // Gọi phương thức play() của từng Track
         }
     }
+    @Override
+    public String toString() {
+        return "CompactDisc[ID=" + getId() + ", Title=" + getTitle() + ", Artist=" + artist + ", Price=" + getPrice() + "]";
+    }
+
 }

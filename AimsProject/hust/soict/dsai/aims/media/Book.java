@@ -82,4 +82,10 @@ public class Book {
         System.out.println("Price: " + price);
         System.out.println("Authors: " + String.join(", ", authors));
     }
+    @Override
+    public String toString() {
+        return "Book[ID=" + getId() + ", Title=" + getTitle() + ", Category=" + getCategory() +
+                ", Price=" + getPrice() + "]";
+    }
+
 }
