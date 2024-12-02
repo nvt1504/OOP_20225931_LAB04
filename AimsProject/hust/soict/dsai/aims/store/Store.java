@@ -1,61 +1,61 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.media.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.media.DigitalVideoDisc từ package disc
 
+import hust.soict.dsai.aims.media.Media;
+import java.util.ArrayList;
 
 public class Store {
-    //  fixed branch
-    private DigitalVideoDisc[] itemsInStore;
-    private int currentCount;
+    private ArrayList<Media> itemsInStore; // Danh sách các đối tượng Media
 
-    public Store(int capacity) {
-        // Khởi tạo mảng các DVD trong cửa hàng với sức chứa tối đa
-        this.itemsInStore = new DigitalVideoDisc[capacity];
-        this.currentCount = 0;
+    // Constructor
+    public Store() {
+        this.itemsInStore = new ArrayList<>();
     }
 
-    // Phương thức thêm DVD vào cửa hàng
-    public void addDVD(DigitalVideoDisc dvd) {
-        if (currentCount < itemsInStore.length) {
-            itemsInStore[currentCount] = dvd;
-            currentCount++;
-            System.out.println("DVD \"" + dvd.getTitle() + "\" đã được thêm vào cửa hàng.");
+    // Phương thức thêm Media vào cửa hàng
+    public void addMedia(Media media) {
+        if (!itemsInStore.contains(media)) {
+            itemsInStore.add(media);
+            System.out.println(media.getTitle() + " đã được thêm vào cửa hàng.");
         } else {
-            System.out.println("Cửa hàng đã đầy, không thể thêm DVD \"" + dvd.getTitle() + "\".");
+            System.out.println(media.getTitle() + " đã tồn tại trong cửa hàng.");
         }
     }
 
-    // Phương thức xóa DVD khỏi cửa hàng
-    public boolean removeDVD(DigitalVideoDisc dvd) {
-        boolean isRemoved = false;
-        for (int i = 0; i < currentCount; i++) {
-            if (itemsInStore[i].getId().equals(dvd.getId())) {
-                // Xóa DVD bằng cách dịch các phần tử còn lại lên
-                for (int j = i; j < currentCount - 1; j++) {
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-                itemsInStore[currentCount - 1] = null; // Xóa phần tử cuối cùng
-                currentCount--;
-                isRemoved = true;
-                System.out.println("DVD \"" + dvd.getTitle() + "\" đã được xóa khỏi cửa hàng.");
-                break;
-            }
+    // Phương thức xóa Media khỏi cửa hàng
+    public boolean removeMedia(Media media) {
+        if (itemsInStore.contains(media)) {
+            itemsInStore.remove(media);
+            System.out.println(media.getTitle() + " đã được xóa khỏi cửa hàng.");
+            return true;
+        } else {
+            System.out.println(media.getTitle() + " không tìm thấy trong cửa hàng.");
+            return false;
         }
-
-        if (!isRemoved) {
-            System.out.println("DVD \"" + dvd.getTitle() + "\" không tìm thấy trong cửa hàng.");
-        }
-        return isRemoved;
     }
 
-    // Phương thức hiển thị các DVD trong cửa hàng
+    // Phương thức hiển thị các Media trong cửa hàng
     public void showItemsInStore() {
-        System.out.println("Danh sách DVD trong cửa hàng:");
-        if (currentCount == 0) {
+        System.out.println("***********************STORE***********************");
+        if (itemsInStore.isEmpty()) {
             System.out.println("Cửa hàng hiện tại trống.");
         } else {
-            for (int i = 0; i < currentCount; i++) {
-                System.out.println((i + 1) + ". " + itemsInStore[i].getTitle() + " - " + itemsInStore[i].getCategory());
+            int count = 1;
+            for (Media media : itemsInStore) {
+                System.out.println(count + ". " + media.getTitle() + " - " + media.getCategory() + " - $" + media.getPrice());
+                count++;
             }
         }
+        System.out.println("***************************************************");
+    }
+
+    // Tìm kiếm Media theo tiêu đề
+    public Media searchMediaByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        System.out.println("Không tìm thấy sản phẩm với tiêu đề: " + title);
+        return null;
     }
 }
