@@ -1,48 +1,53 @@
 package hust.soict.dsai.aims.media;
 
 public abstract class Media {
-    private int id;
-    private String title;
-    private String category;
-    private float price;
+    private final int id;             // Mã định danh không thay đổi
+    private final String title;       // Tiêu đề không thay đổi
+    private final String category;    // Danh mục không thay đổi
+    private final float price;        // Giá không thay đổi
 
+    // Constructor
     public Media(int id, String title, String category, float price) {
+        if (id < 0) throw new IllegalArgumentException("ID must be a non-negative integer.");
+        if (title == null || title.isEmpty()) throw new IllegalArgumentException("Title cannot be null or empty.");
+        if (category == null || category.isEmpty()) throw new IllegalArgumentException("Category cannot be null or empty.");
+        if (price < 0) throw new IllegalArgumentException("Price must be a non-negative value.");
+
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
     }
 
-    // Getters and Setters
+    // Getters
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getCategory() {
         return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    // Override equals() method to compare Media objects by title
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Kiểm tra tham chiếu
+        if (obj == null || getClass() != obj.getClass()) return false; // Kiểm tra kiểu đối tượng
+        Media media = (Media) obj; // Ép kiểu
+        return title.equalsIgnoreCase(media.title); // So sánh tiêu đề (không phân biệt chữ hoa/chữ thường)
+    }
+
+    // Override hashCode() to be consistent with equals()
+    @Override
+    public int hashCode() {
+        return title.toLowerCase().hashCode();
     }
 }
