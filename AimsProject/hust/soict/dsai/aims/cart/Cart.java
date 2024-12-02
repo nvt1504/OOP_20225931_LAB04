@@ -1,116 +1,74 @@
 package hust.soict.dsai.aims.cart;
 
-import hust.soict.dsai.aims.media.DigitalVideoDisc; // Import lớp hust.soict.dsai.aims.media.DigitalVideoDisc từ package disc
-import java.util.ArrayList; // Import lớp ArrayList cho danh sách DVD
-
+import hust.soict.dsai.aims.media.Media;
+import java.util.ArrayList;
 
 public class Cart {
-    private ArrayList<DigitalVideoDisc> dvdList;
+    private ArrayList<Media> itemsOrdered; // Danh sách các đối tượng Media
     private final int capacity;
 
+    // Constructor
     public Cart() {
-        this.dvdList = new ArrayList<>();
+        this.itemsOrdered = new ArrayList<>();
         this.capacity = 20; // Giới hạn tối đa cho giỏ hàng
     }
 
-    public ArrayList<DigitalVideoDisc> getDvdList() {
-        return dvdList;
-    }
-
-    public void addDisc(DigitalVideoDisc disc) {
-        if (dvdList.size() < capacity) {
-            dvdList.add(disc);
-            System.out.println("DVD \"" + disc.getTitle() + "\" đã được thêm vào giỏ hàng.");
+    // Thêm Media vào giỏ hàng
+    public void addMedia(Media media) {
+        if (itemsOrdered.size() < capacity) {
+            if (!itemsOrdered.contains(media)) {
+                itemsOrdered.add(media);
+                System.out.println(media.getTitle() + " đã được thêm vào giỏ hàng.");
+            } else {
+                System.out.println(media.getTitle() + " đã tồn tại trong giỏ hàng.");
+            }
         } else {
-            System.out.println("Không thể thêm DVD. Giỏ hàng đã đầy.");
+            System.out.println("Không thể thêm Media. Giỏ hàng đã đầy.");
         }
     }
 
-    public boolean removeDisc(DigitalVideoDisc disc) {
-        boolean isRemoved = dvdList.remove(disc);
-        if (isRemoved) {
-            System.out.println("DVD \"" + disc.getTitle() + "\" đã được xóa khỏi giỏ hàng.");
+    // Xóa Media khỏi giỏ hàng
+    public void removeMedia(Media media) {
+        if (itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println(media.getTitle() + " đã được xóa khỏi giỏ hàng.");
         } else {
-            System.out.println("DVD \"" + disc.getTitle() + "\" không tìm thấy trong giỏ hàng.");
+            System.out.println(media.getTitle() + " không tìm thấy trong giỏ hàng.");
         }
-        return isRemoved;
     }
 
+    // Tính tổng chi phí
     public float calculateTotalPrice() {
         float totalPrice = 0;
-        for (DigitalVideoDisc disc : dvdList) {
-            totalPrice += disc.getPrice();
+        for (Media media : itemsOrdered) {
+            totalPrice += media.getPrice();
         }
         return totalPrice;
     }
 
+    // Hiển thị thông tin giỏ hàng
     public void showItems() {
-        System.out.println("Giỏ hàng có " + dvdList.size() + " DVD:");
-        for (DigitalVideoDisc disc : dvdList) {
-            disc.showInfo();
-            System.out.println();
+        System.out.println("Giỏ hàng có " + itemsOrdered.size() + " mục:");
+        for (Media media : itemsOrdered) {
+            System.out.println("- " + media.getTitle() + ": $" + media.getPrice());
         }
         System.out.println("Tổng giá: $" + calculateTotalPrice());
     }
 
-    //overloading
-    public void addDisc(DigitalVideoDisc[] dvdList) {
-        for (DigitalVideoDisc disc : dvdList) {
-            if (this.dvdList.size() < capacity) {
-                this.dvdList.add(disc);
-                System.out.println("DVD \"" + disc.getTitle() + "\" đã được thêm vào giỏ hàng.");
-            } else {
-                System.out.println("Giỏ hàng đã đầy, không thể thêm DVD \"" + disc.getTitle() + "\".");
-                break; // Dừng lại nếu giỏ hàng đầy
-            }
-        }
-    }
-    
-    // method allows to pass an arbitrary number of arguments for dvd.
-    // public void addDisc(hust.soict.dsai.aims.media.DigitalVideoDisc... dvdArray) {
-    //     for (hust.soict.dsai.aims.media.DigitalVideoDisc disc : dvdArray) {
-    //         if (this.dvdList.size() < capacity) {
-    //             this.dvdList.add(disc);
-    //             System.out.println("DVD \"" + disc.getTitle() + "\" đã được thêm vào giỏ hàng.");
-    //         } else {
-    //             System.out.println("Giỏ hàng đã đầy, không thể thêm DVD \"" + disc.getTitle() + "\".");
-    //             break; // Dừng lại nếu giỏ hàng đầy
-    //         }
-    //     }
-    // }
-    
-    public void addDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        if (this.dvdList.size() < capacity) {
-            this.dvdList.add(dvd1);
-            System.out.println("DVD \"" + dvd1.getTitle() + "\" đã được thêm vào giỏ hàng.");
-        } else {
-            System.out.println("Giỏ hàng đã đầy, không thể thêm DVD \"" + dvd1.getTitle() + "\".");
-            return; // Nếu giỏ hàng đầy, không thêm DVD thứ hai
-        }
-
-        if (this.dvdList.size() < capacity) {
-            this.dvdList.add(dvd2);
-            System.out.println("DVD \"" + dvd2.getTitle() + "\" đã được thêm vào giỏ hàng.");
-        } else {
-            System.out.println("Giỏ hàng đã đầy, không thể thêm DVD \"" + dvd2.getTitle() + "\".");
-        }
-    }
-
+    // In chi tiết giỏ hàng
     public void printCartDetails() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
-        if (dvdList.isEmpty()) {
+        if (itemsOrdered.isEmpty()) {
             System.out.println("Giỏ hàng hiện tại trống.");
         } else {
             int count = 1;
-            for (DigitalVideoDisc disc : dvdList) {
-                System.out.println(count + ". DVD - " + disc.getTitle() + " - " + disc.getCategory() + " - " 
-                    + disc.getDirector() + " - " + disc.getLength() + " minutes: $" + disc.getPrice());
+            for (Media media : itemsOrdered) {
+                System.out.println(count + ". " + media.getTitle() + " - " + media.getCategory() + " - $" + media.getPrice());
                 count++;
             }
         }
         System.out.println("Total cost: $" + calculateTotalPrice());
         System.out.println("***************************************************");
     }
-    
 }
